@@ -18,3 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/list', 'PostController@getList')->name('list');
+    Route::get('/favs', 'PostController@getFavorites')->name('favs');
+    Route::post('/new', 'PostController@postNew')->name('new');
+    Route::get('fav/{id}', 'PostController@favorite')->name('fav');
+});
