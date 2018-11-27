@@ -25,7 +25,7 @@
 
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                            <h5 class="card-title"> {{ $post->name }}</h5>
+                            <h5 class="card-title"> {{ $post->title }} de {{ $post->name }}</h5>
                             <p class="card-text">
                                     {{ $post->text }}
                             </p>
@@ -45,14 +45,26 @@
                     <div class="card-header">Crie seu post!</div>
 
                     <div class="card-body">
-                        <div class="input-group">
-                            <input id="text" type="text" class="form-control" name="text" value="{{ old('text') }}" required>
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Postar!') }}
+                        {{-- <div class="input-group"> --}}
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Título</span>
+                                </div>
+                                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required>
+                            </div>
+                                    
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Seu texto</span>
+                                </div>
+                                <textarea id="text" name="text" value="{{ old('text') }}" class="form-control" aria-label="With textarea"></textarea>
+                            </div>
+                            <div class="row">
+                                <button type="submit" class="btn btn-primary col-md-4 offset-md-4 ">
+                                        {{ __('Postar!') }}
                                 </button>
-                            </span>     
-                        </div>
+                            </div>     
+                        {{-- </div> --}}
                     </div>
                 </form>
             </div>

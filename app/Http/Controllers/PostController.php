@@ -12,7 +12,7 @@ class PostController extends Controller
 {
     public function getList() {
         $posts = DB::table('posts')
-            ->select('posts.id', 'posts.text', 'users.name',
+            ->select('posts.id', 'posts.title', 'posts.text', 'users.name',
                 DB::raw('(CASE WHEN favorites.user_id = ' . Auth::id() . ' THEN 1 ELSE 0 END) AS is_user'))
             ->join('users', 'users.id', '=', 'posts.user_id')
             ->leftJoin('favorites', function ($join) {
@@ -23,7 +23,7 @@ class PostController extends Controller
 
     public function getFavorites() {
         $posts = DB::table('posts')
-            ->select('posts.id' ,'posts.text', 'users.name',
+            ->select('posts.id', 'posts.title' ,'posts.text', 'users.name',
                 DB::raw('1 as is_user'))
             ->join('users', 'users.id', '=', 'posts.user_id')
             ->join('favorites', 'favorites.post_id', '=', 'posts.id')
@@ -34,6 +34,7 @@ class PostController extends Controller
 
     public function postNew(Request $request) {
         $post = new Post;
+        $post->title = $request->title;
         $post->text = $request->text;
         $post->user()->associate(Auth::user());
         $post->save();

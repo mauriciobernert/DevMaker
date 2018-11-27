@@ -24,4 +24,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('favs', 'PostController@getFavorites')->name('favs');
     Route::post('new', 'PostController@postNew')->name('new');
     Route::get('fav/{id}', 'PostController@favorite')->name('fav');
+    Route::post('submitchange', 'HomeController@change')->name('submitchange');
+    Route::get('change', function () { return view('auth.changepass'); })->name('change');
 });

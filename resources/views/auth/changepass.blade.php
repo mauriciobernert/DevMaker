@@ -8,29 +8,21 @@
                 <div class="card-header">{{ __('Alterar Senha') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    @hasSection('success')
+                        <div class="alert alert-success">{!! Session::get('success') !!}</div>
+                    @endif
+                    @hasSection('failure')
+                        <div class="alert alert-danger">{!! Session::get('failure') !!}</div>
+                    @endif
+                    <form method="POST" action="{{ route('submitchange') }}">
                         @csrf
 
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
 
                         <div class="form-group row">
                             <label for="old-password" class="col-md-4 col-form-label text-md-right">{{ __('Senha Antiga') }}</label>
 
                             <div class="col-md-6">
-                                <input id="old-password" type="password" class="form-control{{ $errors->has('old-password') ? ' is-invalid' : '' }}" name="old-password" required>
+                                <input id="old" type="password" class="form-control{{ $errors->has('old') ? ' is-invalid' : '' }}" name="old" required>
 
                                 @if ($errors->has('old-password'))
                                     <span class="invalid-feedback" role="alert">
@@ -65,7 +57,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Cadastrar-se') }}
+                                    {{ __('Alterar senha') }}
                                 </button>
                             </div>
                         </div>
